@@ -79,4 +79,4 @@ https://docs.google.com/spreadsheets/d/1F8ubPokNcRE0-43Uc_mAcJqed0Z9fllsrT5sBVOA
 문제 풀이방법에 대한 논의(의사코드 수준까지 허용)
 
 
-1학년 대상 질의응답 및 추가 개념 설명
+1학년 대상 질의응답 및 추가 개념 설명!!
