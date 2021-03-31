@@ -1,0 +1,28 @@
+from collections import deque
+
+def solution(priorities, location):
+    answer = 0
+    
+    q = deque()
+    
+    for i in range(0, len(priorities)):
+        q.append((i, priorities[i]))
+        
+    high_flag = False
+    count = 0;
+    while len(q) != 0:
+        p = q.popleft()
+        for i in range(0,len(q)):
+            p_tmp = q.popleft()
+            if(p_tmp[1] > p[1]):
+                high_flag = True
+            q.append(p_tmp)
+        if(high_flag):
+            q.append(p)
+            high_flag = False
+        else:
+            count += 1;
+            if(location == p[0]):
+                answer = count
+                break
+    return answer
