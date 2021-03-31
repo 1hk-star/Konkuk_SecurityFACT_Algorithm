@@ -1,0 +1,27 @@
+from collections import deque
+
+def solution(progresses, speeds):
+    answer = []
+    q = deque()
+    
+    for i in range(0, len(progresses)):
+        q.append(i)
+
+    while len(q) != 0:
+        current_i = q.popleft()
+        if progresses[current_i] >= 100:
+            count = 1
+            for i in range(current_i+1, len(progresses)):
+                if(progresses[i] >= 100):
+                    count +=1
+                    q.popleft()
+                else:
+                    break
+            answer.append(count)
+        else:
+            for i in range(current_i, len(progresses)):
+                if(progresses[i] < 100):
+                    progresses[i] += speeds[i]
+            q.appendleft(current_i)
+        
+    return answer

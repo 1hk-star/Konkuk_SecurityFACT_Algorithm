@@ -1,0 +1,43 @@
+import queue
+
+def solution(bridge_length, weight, truck_weights):
+    q = queue.Queue() #다리 구현
+    w_q = queue.Queue() # 트럭 무게들 저장
+    arrive_total_weight = 0
+    current_arrive_total_weight = 0
+    on_weight = 0 #다리 위 무게 합
+    on_second = 0 # 소요시간
+    on_bridge_flag = True #다리 위에 트럭 올리기 성공 여부
+    
+    for w in truck_weights:
+        w_q.put(w)
+        arrive_total_weight += w
+        
+    while arrive_total_weight != current_arrive_total_weight:
+        #새로운 트럭을 큐에서 뽑음
+        if(on_bridge_flag):
+            if w_q.qsize() != 0:
+                truck_weight = w_q.get()
+            else:
+                truck_weight = 0
+        #다리 위 무게 합에 내 트럭을 합해서 무게가 넘지 않는다면 추가
+        if(on_weight + truck_weight <= weight):
+            q.put(truck_weight)
+            on_weight += truck_weight
+            on_bridge_flag = True
+            #print("push ", on_second, truck_weight)
+        #넘는다면 임의값 0 추가
+        else:
+            q.put(0)
+            on_bridge_flag = False
+           # print("push ", on_second, 0)
+        #다리 큐의 사이즈가 다리 길이를 넘는다면 팝을 시킴.
+        if(q.qsize() == bridge_length):
+            arrive_weight = q.get()
+            on_weight -= arrive_weight
+            current_arrive_total_weight += arrive_weight
+          #  print("pop ", on_second, arrive_weight)
+        on_second += 1
+    
+    
+    return on_second+1
