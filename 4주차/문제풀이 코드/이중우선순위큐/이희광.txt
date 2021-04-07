@@ -1,0 +1,46 @@
+#include <vector>
+#include <queue>
+#include <string>
+
+using namespace std;
+
+vector<int> solution(vector<string> operations) {
+    vector<int> answer = {0,0};
+    int count = 0;
+    priority_queue<int,vector<int>,greater<int>> q_min;
+    priority_queue<int, vector<int>> q_max;
+    
+    for(int i =0; i < operations.size(); i ++){
+        //삽입
+        if(operations[i][0] == 'I'){
+            q_min.push(stoi(operations[i].substr(2)));
+            q_max.push(stoi(operations[i].substr(2)));
+            count++;
+        }
+        else{ //삭제
+            if(count == 0){
+                continue;
+            }
+            if(operations[i][2] == '1'){
+                q_max.pop();
+                count--;
+            }
+            else{
+                q_min.pop();
+                count--;
+            }
+        }
+        if(count == 0){
+            while(!q_max.empty()) q_max.pop();
+            while(!q_min.empty()) q_min.pop();
+        }
+    }
+    
+    if(count != 0){
+        answer[0] = q_max.top();
+        answer[1] = q_min.top();
+    }
+    
+    
+    return answer;
+}
