@@ -1,0 +1,32 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+vector<int> solution(int brown, int yellow) {
+    vector<int> answer;
+    int h=0, w=0;
+    int a_sum_b= 0, a_mul_b=0;
+    a_sum_b = (brown-4)/2;
+    a_mul_b = yellow;
+    for(int i =1; i < a_sum_b/2+1 ; i ++){
+        if(i * (a_sum_b-i) == a_mul_b){
+            if(i > (a_sum_b-i)){
+                answer.push_back(i+2);  
+                answer.push_back(a_sum_b-i+2);
+            }
+            else{
+                answer.push_back(a_sum_b-i+2);
+                answer.push_back(i+2);  
+            }
+        }
+    }
+    return answer;
+}
+
+// 갈색 = 4 + 2a + 2b;
+// 노랑 = a X b;
+// 전체 = (a + 2) x (b + 2)
+// 갈색 = 10 -4 = ㅇ
+// 노랑 = 2
+//

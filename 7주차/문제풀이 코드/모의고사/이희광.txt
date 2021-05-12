@@ -1,0 +1,39 @@
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <stdio.h>
+
+using namespace std;
+
+vector<int> solution(vector<int> answers) {
+    vector<int> answer;
+    int ans_2[8] = {2,1,2,3,2,4,2,5} ;
+    int ans_3[10] = {3,3,1,1,2,2,4,4,5,5};
+    int a[3] = {0,0,0};
+    
+    for(int i =0; i < answers.size(); i++){
+        if((i%5+1) == answers[i])
+            a[0]++;
+        if(ans_2[i % 8] == answers[i])
+            a[1]++;
+        if(ans_3[i % 10] == answers[i])
+            a[2]++;
+    }
+   for(int i = 0; i < 3 ; i++){
+       if(i != 0){
+           if(a[answer[0]-1] < a[i]){
+               answer.clear();
+               answer.push_back(i+1);
+              // printf("%d %d \n",answer[i-1],a[i]);
+           }
+           else if(a[answer[0]-1] == a[i]){
+               answer.push_back(i+1);
+           }
+       }
+       else
+        answer.push_back(i+1);
+       
+   }
+    
+    return answer;
+}
