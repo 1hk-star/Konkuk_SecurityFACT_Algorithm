@@ -1,0 +1,53 @@
+#include <string>
+#include <vector>
+#include <cstdlib>
+#include <stdio.h>
+#include <algorithm>
+#include <cmath>
+
+using namespace std;
+
+bool sosu(int num) {
+	if (num < 2) return false;
+	int a = (int) sqrt(num);
+	for (int i = 2; i <= a; i++) if (num % i == 0) return false;
+	return true;
+}
+
+int solution(string numbers) {
+    int answer = 0;
+    
+    //string -> char*
+    const char * ctr = numbers.c_str();
+    string str="";
+    vector<int> num;
+    vector<int> ans;
+    
+    //char* -> int
+    for(int i =0; i < numbers.length(); i++){
+        num.push_back((int)ctr[i]-48);   
+    }
+    //정렬
+    sort(num.begin(), num.end());
+    
+    //임의로 나온 수의 모든 부분을 잘라 큐에 넣기.
+    do {
+        for (int i = 0; i <= num.size(); i++) {
+            int tmp = 0;
+            for (int j = 0; j < i; j++) {
+                tmp = (tmp * 10) + num[j];
+                ans.push_back(tmp);
+            }
+        }
+    } while(next_permutation(num.begin(), num.end()));
+
+    sort(ans.begin(), ans.end());
+    ans.erase(unique(ans.begin(), ans.end()), ans.end());
+    
+    // 소수 찾기
+    for (int i = 0; i < ans.size(); i++) {
+        if (sosu(ans[i])) answer += 1;
+    }
+    
+    return answer;
+}
