@@ -1,0 +1,49 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+int MIN = 100;
+
+bool checkString(string a, string b)
+{
+    int diff=0;
+    for(int i=0 ; i<a.size(); i++)
+    {
+        if(a[i]!=b[i])
+        {
+            diff++;
+        }
+    }
+    if(diff==1)
+        return true;
+    else
+        return false;
+}
+
+void dfs(string begin, string target, vector<string> words, vector<bool>& visit,int count){
+    
+    for(int i =0; i < words.size(); i++){
+        if(checkString(begin,words[i])){
+            if(target == words[i]){
+                count++;
+                if(MIN > count){
+                    MIN = count;   
+                }
+                return; 
+            }
+            if(!visit[i]){
+                visit[i] = true;
+                dfs(words[i],target,words,visit,count+1);
+            }
+        }
+    }
+}
+
+int solution(string begin, string target, vector<string> words) {
+    vector<bool> visit(words.size(),false);
+    dfs(begin,target,words,visit,0);
+    
+    if(MIN == 100)
+        return 0;
+    return MIN;
+}

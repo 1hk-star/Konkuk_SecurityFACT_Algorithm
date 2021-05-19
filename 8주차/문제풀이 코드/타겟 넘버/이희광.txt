@@ -1,0 +1,27 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int num=0;
+void dfs(int n, int index, vector<vector<int>> computers, vector<bool>& visit){
+    visit[index] = true;
+    
+    for(int i =0; i< n; i++){
+        if(computers[index][i] == 1 && i != index && !visit[i]){
+            dfs(n,i,computers,visit);
+        }
+    }
+}
+int solution(int n, vector<vector<int>> computers) {
+   vector<bool> visit(n,false);
+    for(int i = 0; i < n; i++){
+        //방문하지 않았다면
+        if(!visit[i]){
+            
+            dfs(n, i, computers, visit);
+            num++;
+        }
+    }
+    return num;
+}
