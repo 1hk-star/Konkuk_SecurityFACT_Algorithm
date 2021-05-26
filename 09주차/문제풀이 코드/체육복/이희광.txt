@@ -1,0 +1,53 @@
+#include <string>
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+int solution(int n, vector<int> lost, vector<int> reserve) {
+    int answer = 0;
+    vector<int> student_state;
+    
+    for(int i =0; i < n; i++){
+        student_state.push_back(0);    
+    }
+    for(int i =0; i<lost.size(); i++){
+        student_state[lost[i]-1] -= 1;
+    }
+    for(int i =0; i<reserve.size(); i++){
+        student_state[reserve[i]-1] += 1;
+    }
+    for(int i =0; i<n; i++){
+        //   for(int i =0; i < n; i++){
+        // cout << student_state[i] << " "; 
+        // }
+        //  cout << endl;
+        if(i==0){
+            if(student_state[i]==-1 && student_state[i+1] == 1){
+                student_state[i+1] -= 1;
+                student_state[i] +=1;
+            }
+        }else if(i== n-1){
+            if(student_state[i]==-1 && student_state[i-1] == 1){
+                student_state[i-1] -= 1;
+                student_state[i] += 1;
+            }
+        }else{
+            if(student_state[i] == -1){
+                if(student_state[i-1] == 1){
+                     student_state[i-1] -= 1;
+                     student_state[i] += 1;
+                }else if(student_state[i+1] == 1){
+                     student_state[i+1] -= 1;
+                    student_state[i] += 1;
+                }
+            }
+        }
+    }
+    for(int i =0; i < n; i ++){
+        if(student_state[i] >= 0)
+            answer++;
+    }
+    
+    return answer;
+}
