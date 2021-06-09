@@ -69,10 +69,14 @@ https://programmers.co.kr/learn/challenges
 
 총 점수 3,4학년 상위 2명 + 1학년 상위 1명 추가 선물
 
+3,4학년 1등 전계원, 2등 이희광
+1학년 1등 유의진
 
 https://docs.google.com/spreadsheets/d/1F8ubPokNcRE0-43Uc_mAcJqed0Z9fllsrT5sBVOA0mw/edit?usp=sharing 
 
 ## Colearning hour
+매주 일요일 오후 1시 ~ 4시
+
 특정 하루를 정해 가능한 사람들끼리 모여 문제를 같이 푸는 시간.
 
 
